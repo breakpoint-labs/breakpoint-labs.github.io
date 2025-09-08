@@ -1,14 +1,36 @@
 
 // Theme toggle and state
 (function() {
+   emailjs.init('glp_yIE8fz5GZDhm1');
+   
   function handleSubmit(event) {
-    console.log('ytest')
     event.preventDefault();
-    const form = event.target;
+    const form = document.querySelector('#leadForm');
+    const name = form.querySelector('[name="user_name"]').value;
+    const email = form.querySelector('[name="user_email"]').value;
+    const phone = form.querySelector('[name="user_phone"]').value;
+    const service = form.querySelector('[name="service"]').value;
+    const summary = form.querySelector('[name="project_summary"]').value;
+    const budget = form.querySelector('[name="budget"]').value;
+    const company = form.querySelector('[name="company"]').value;
+
     if (!form.checkValidity()) {
       form.classList.add('was-validated');
       return;
     }
+
+    emailjs.send("service_clnb7rr","template_sdrs2yf",{
+            title: service,
+            name: name,
+            user_name: name,
+            user_email: email,
+            user_phone: phone,
+            service: service,
+            project_summary: summary,
+            company: company,
+            budget: budget,
+        }, 'glp_yIE8fz5GZDhm1');
+
     // Show success message
     document.getElementById("formSuccess").classList.remove("d-none");
     form.reset();
